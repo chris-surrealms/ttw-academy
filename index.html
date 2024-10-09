@@ -1,12 +1,39 @@
 <html>
- <head>
-  <style>
-    body { margin:0; padding:0; }
-    iframe { position: absolute; height: 100%; width: 100%; }
-  </style>
-  <title>Google Drive Website</title>
- </head>
- <body>
-   <iframe src="https://script.google.com/macros/s/AKfycbycUi_l8nDNbSvF4MLvV64LT29xTAVZE954zz8r6BRJ/dev" frameborder="0"></iframe>
- </body>
+  <head>
+    <style>
+      body { margin:0; padding:0; }
+      iframe { position: absolute; height: 100%; width: 100%; }
+    </style>
+    <title>Google Drive Website</title>
+  </head>
+  <body>
+    <iframe id="myIframe" src="" frameborder="0"></iframe>
+
+    <script>
+      // Get parameters from the URL of the parent page (GitHub Pages)
+      function getQueryParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let paramString = '';
+
+        // Iterate over all parameters to build query string
+        urlParams.forEach((value, key) => {
+          if (paramString === '') {
+            paramString += `${key}=${value}`;
+          } else {
+            paramString += `&${key}=${value}`;
+          }
+        });
+
+        return paramString;
+      }
+
+      // Dynamically set iframe source with parameters
+      const iframe = document.getElementById('myIframe');
+      const baseUrl = 'https://script.google.com/macros/s/AKfycbxtqhLxlSwJ004maiERjorkvJqaY8uZyflrvpYlimP6gmtgbcRhfNFUfIoj0yIR2uNjyA/exec';
+
+      // If parameters exist, append them to the iframe URL
+      const params = getQueryParams();
+      iframe.src = params ? `${baseUrl}?${params}` : baseUrl;
+    </script>
+  </body>
 </html>
