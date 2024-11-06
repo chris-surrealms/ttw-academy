@@ -46,6 +46,7 @@
       iframe.src = params ? `${baseUrl}?${params}` : baseUrl;
 
       window.addEventListener('message', (event) => {
+        console.log(event.data);
         document.title = event.data;
       });
     </script>
