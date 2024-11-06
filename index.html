@@ -45,10 +45,43 @@
       const params = getQueryParams();
       iframe.src = params ? `${baseUrl}?${params}` : baseUrl;
       
-      iframe.onload = function() {
-        // Access the iframe's title directly if it's on the same domain
-        document.title = iframe.contentDocument.title;
-      };
+      // Get the "mode" parameter from the URL
+      function getModeParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('mode');
+      }
+      
+      // Set the title based on the "mode" parameter
+      function setTitleBasedOnMode() {
+        const mode = getModeParam();
+        let title;
+      
+        switch (mode) {
+          case 'player_mmr':
+            title = 'TTW Academy - Player MMR';
+            break;
+          case 'maze_designer':
+            title = 'TTW Academy - Maze Designer';
+            break;
+          case 'player_lookup':
+            title = 'TTW Academy - Player Lookup';
+            break;
+          case 'match_lookup':
+            title = 'TTW Academy - Match Lookup';
+            break;
+          case 'faction_info':
+            title = 'TTW Academy - Faction Info';
+            break;
+          default:
+            title = 'Tropical Tower Wars Academy'; // Default title if "mode" is not found
+        }
+      
+        // Set the page's title
+        document.title = title;
+      }
+      
+      // Call the function to set the title when the page loads
+      setTitleBasedOnMode();
 
     </script>
   </body>
