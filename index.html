@@ -44,11 +44,12 @@
       // If parameters exist, append them to the iframe URL
       const params = getQueryParams();
       iframe.src = params ? `${baseUrl}?${params}` : baseUrl;
+      
+      iframe.onload = function() {
+        // Access the iframe's title directly if it's on the same domain
+        document.title = iframe.contentDocument.title;
+      };
 
-      window.addEventListener('message', (event) => {
-        console.log(event.data);
-        document.title = event.data;
-      });
     </script>
   </body>
 </html>
