@@ -44,6 +44,10 @@
       // If parameters exist, append them to the iframe URL
       const params = getQueryParams();
       iframe.src = params ? `${baseUrl}?${params}` : baseUrl;
+
+      window.addEventListener('message', (event) => {
+        document.title = event.data;
+      });
     </script>
   </body>
 </html>
